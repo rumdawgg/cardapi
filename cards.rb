@@ -1,23 +1,12 @@
 require 'net/http'
 require 'json'
-
-def new_game()
-  uri = URI('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
-  my_hash = JSON.parse(Net::HTTP.get(uri))
-  return my_hash['deck_id']
-end
-
-def draw_card(deck_id)
-  uri = URI("https://deckofcardsapi.com/api/deck/#{deck_id}/draw/?count=1")
-  my_hash = JSON.parse(Net::HTTP.get(uri))
-  puts my_hash['cards'].first['value']
-end
+require_relative 'functions'
 
 prompt = '> '
 
-puts "Welcome to my card game."
+puts 'Welcome to my card game.'
 puts prompt
 
-id = new_game()
+id = new_game
 card = draw_card(id)
 puts card
